@@ -91,16 +91,13 @@ client.on('message', async (channel, tags, message, self) => {
   const messageId = tags.id;
   if (!messageId || processedMessages.has(messageId)) return;
   processedMessages.set(messageId, Date.now());
-  const username = tags.username;
   const isModerator = tags.mod || (tags.badges && tags.badges.moderator);
   const isBroadcaster = tags.badges && tags.badges.broadcaster;
 
   // !clip
   if (message.toLowerCase() === '!clip') {
-    const isGoaleex = username.toLowerCase() === 'goaleex';
-    const isSuiiigfx = username.toLowerCase() === 'suiiigfx';
-    if (!isModerator && !isBroadcaster && !isGoaleex && !isSuiiigfx) {
-      client.say(channel, 'Solo moderadores, goaleex o suiiigfx pueden usar este comando');
+    if (!isModerator && !isBroadcaster) {
+      client.say(channel, 'Solo moderadores o blackelespanolito pueden usar este comando');
       return;
     }
     const currentTime = Date.now();
